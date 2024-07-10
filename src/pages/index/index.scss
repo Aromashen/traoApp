@@ -4,7 +4,11 @@
     top:0;
     flex-direction: row;
     justify-content: flex-end;
+    background:linear-gradient( 45deg, #13254F 0%, #2B4C87 100%);
 
+}
+.routeTitle{
+  color:#fff
 }
 .icon{
   justify-content: flex-end;  

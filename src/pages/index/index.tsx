@@ -3,6 +3,7 @@ import { useLoad } from '@tarojs/taro'
 import { useState } from 'react'
 import './index.scss'
 import more from "../../assets/more.png"
+import bgImg from "../../assets/about/2.png"
 
 export default function Index() {
 
@@ -18,7 +19,7 @@ export default function Index() {
   return (
     <View className='index'>
      {!toggle&&<View className="header">
-      <Text>首页</Text>
+      <Text className="routeTitle">首页</Text>
       <Image src={more} style={{width:'12px',height:'12px'}} className="icon" onClick={toggleMenu}></Image>
      </View>}
      {toggle&&<View className='dropDown'>

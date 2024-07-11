@@ -28,7 +28,7 @@ export default function Index() {
     setToggle(false)
     if(item.name="关于")
     Taro.navigateTo({
-  url:'pages/home/index'
+      url:'pages/home/index'
   })
 
   }
@@ -37,19 +37,17 @@ export default function Index() {
     <View className='index'>
      {!toggle&&<View className="header">
       <Text className="routeTitle">{activeText}</Text>
-      <Image src={more} style={{width:'18px',height:'18px'}} className="icon" onClick={toggleMenu}></Image>
+      <Image src={more} style={{width:'32px',height:'32px'}} className="icon" onClick={toggleMenu}></Image>
      </View>}
      {toggle&&<>
       <View className='dropDown'>
-        <Image src={cross} style={{width:'18px',height:'18px'}} className="icon" onClick={toggleMenu}></Image>
+        <Image src={cross} style={{width:'32px',height:'32px',marginRight:'-8px',marginBottom:'18px'}} className="icon" onClick={toggleMenu}></Image>
         {menus.map(item=>(<View onClick={()=>{selectName(item)}}>
           <Text className='routeTitle1'>{item.name}</Text>
         </View>))}
       </View>
       <View className='mask'></View>
-     </>
-     
-        } 
+     </>} 
     </View>
   )
 }

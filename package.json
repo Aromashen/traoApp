@@ -39,7 +39,7 @@
   ],
   "author": "",
   "dependencies": {
-    "@antmjs/vantui": "^3.4.5",
+    "@antmjs/vantui": "^3.4.7",
     "@babel/runtime": "^7.21.5",
     "@tarojs/components": "3.6.32",
     "@tarojs/helper": "3.6.32",

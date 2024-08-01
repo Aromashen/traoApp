@@ -6,6 +6,7 @@ import { useState,useEffect } from 'react'
 import './index.scss'
 import more from "../../assets/more.png"
 import cross from "../../assets/cross.png"
+import logo from "../../assets/logo.webp"
 
 export default function Index() {
 
@@ -26,7 +27,7 @@ export default function Index() {
   const selectName = (item)=>{
     setActiveText(item.name)
     setToggle(false)
-    if(item.name="关于")
+    if(item.name=="关于")
     Taro.navigateTo({
       url:'pages/home/index'
   })
@@ -36,8 +37,12 @@ export default function Index() {
   return (
     <View className='index'>
      {!toggle&&<View className="header">
-      <Text className="routeTitle">{activeText}</Text>
-      <Image src={more} style={{width:'32px',height:'32px'}} className="icon" onClick={toggleMenu}></Image>
+      <Image src={logo} style={{height:'32px'}}></Image>
+      <View>
+        <Text className="routeTitle">{activeText}</Text>
+        <Image src={more} style={{width:'32px',height:'32px'}} className="icon" onClick={toggleMenu}></Image>
+      </View>
+      
      </View>}
      {toggle&&<>
       <View className='dropDown'>
@@ -47,7 +52,8 @@ export default function Index() {
         </View>))}
       </View>
       <View className='mask'></View>
-     </>} 
+     </>}
+     <View><Text>主题内容</Text></View> 
     </View>
   )
 }

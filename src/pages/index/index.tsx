@@ -1,5 +1,5 @@
-import { View, Text, Image } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
+import { View, Text, Image,ScrollView } from '@tarojs/components'
+import { useLoad,useReachBottom } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
 import { useState,useEffect } from 'react'
@@ -9,10 +9,62 @@ import cross from "../../assets/cross.png"
 import logo from "../../assets/logo.webp"
 
 export default function Index() {
+  const mockData = [
+    {
+    title:'旅游',
+    value:'tour',
+    subData:[
+      {
+      title:'一日游',
+      value:"daliyTour",
+    },
+    {
+      
+      title:'跟团游',
+      value:"followTour",
+
+    },
+    {
+      
+      title:'自由行',
+      value:"freeTour",
+
+    
+    }
+    
+      ] 
+    },
+    {
+      title:'酒店',
+      value:'hotel',
+      subData:[
+        {
+        title:'快捷酒店',
+        value:"quickHotel",
+      },
+      {
+        
+        title:'跟团游',
+        value:"followTour",
+
+      },
+      {
+        
+        title:'自由行',
+        value:"freeTour",
+
+      
+      }
+      
+        ] 
+      }
+]
 
   useLoad(() => {
     console.log('Page loaded.')
+  
   })
+  useReachBottom(()=>{console.log('usereachBottom')})
   const [toggle,setToggle] = useState(false)
   const [activeText,setActiveText] = useState('首页')
   const menus = [{name:'首页',value:'index'},{name:'关于',value:'home'}]
@@ -32,6 +84,13 @@ export default function Index() {
       url:'pages/home/index'
   })
 
+  }
+  const clickLeft = (item)=>{
+    mockData.forEach(left=>{
+      if(item.title==left.title){
+        item.isSelected = !item.isSelected
+      }
+    })
   }
 
   return (
@@ -53,7 +112,14 @@ export default function Index() {
       </View>
       <View className='mask'></View>
      </>}
-     <View><Text>主题内容</Text></View> 
+     <View className='container'>
+      <ScrollView className='left'>
+        {mockData.map(item=>(<View key={item.value} className="leftItem" onClick={()=>clickLeft(item)}>
+          <Text>{item.title}</Text>
+        </View>))}
+      </ScrollView>
+
+      </View> 
     </View>
   )
 }

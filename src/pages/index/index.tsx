@@ -10,6 +10,7 @@ import logo from "../../assets/logo.webp"
 
 export default function Index() {
   const right = useRef(null)
+  const width = Taro.getSystemInfoSync().screenWidth
   const mockData = [
     {
     title:'旅游',
@@ -46,18 +47,42 @@ export default function Index() {
         isSelected:false,
       },
       {
-        title:'跟团游',
-        value:"followTour",
+        title:'连锁酒店',
+        value:"linkHotel",
         isSelected:false,
       },
       { 
-        title:'自由行',
-        value:"freeTour",
+        title:'高奢酒店',
+        value:"expensiveHotel",
         isSelected:false,
       }
       
         ] 
-      }
+      },
+      {
+        title:'景点',
+        value:'sight',
+        isSelected:false,
+        subData:[
+          {
+          title:'5a',
+          value:"5a",
+          isSelected:false,
+        },
+        {
+          
+          title:'4a',
+          value:"4a",
+          isSelected:false,
+        },
+        {
+          
+          title:'3a',
+          value:"3a",
+          isSelected:false,
+        }
+          ] 
+        },
 ]
 
   useLoad(() => {
@@ -68,6 +93,8 @@ export default function Index() {
   const [toggle,setToggle] = useState(false)
   const [activeText,setActiveText] = useState('首页')
   const menus = [{name:'首页',value:'index'},{name:'关于',value:'home'}]
+  const [currentIndex,setCurrentIndex] = useState(0)
+  const [scrollTop,setScrollTop] = useState(0)
   useEffect(()=>{
     console.log(activeText)
 
@@ -85,18 +112,31 @@ export default function Index() {
   })
 
   }
-  const clickLeft = (item)=>{
-    console.log('title',item.title)
+  const clickLeft = (item,index)=>{
 
+    setCurrentIndex(index)
     mockData.forEach(left=>{
       if(item.title==left.title){
         item.isSelected = !item.isSelected
       }
     })
+    let scrollTop = 0
+    scrollTop = index*40
+    setScrollTop(scrollTop)
+    
   }
-  const scrollRight = ()=>{
-    console.log('scroll',right.current)
-  }
+  const scrollRight = (e)=>{
+    const scrollTop = e.detail.scrollTop;
+    setScrollTop(scrollTop);
+
+    let totalHeight = 0;
+    for (let i = 0; i < mockData.length; i++) {
+      totalHeight += 40
+      if (scrollTop < totalHeight) {
+        setCurrentIndex(i);
+        break;
+      }
+    }  }
   const test = (subItem)=>{
     console.log('subItem',subItem)
   }
@@ -121,13 +161,13 @@ export default function Index() {
       <View className='mask'></View>
      </>}
      <View className='container'>
-      <ScrollView className='left'>
-        {mockData.map(item=>(<View key={item.value} onClick={()=>clickLeft(item)} className={["leftItem",item.isSelected?'active':'normal'].join(' ')}>
+      <ScrollView className='left' scrollY={true}>
+        {mockData.map((item,index)=>(<View key={item.value} onClick={()=>clickLeft(item,index)} className={["leftItem",currentIndex==index?'active':'normal'].join(' ')}>
           <Text>{item.title}</Text>
         </View>))}
       </ScrollView>
-      <ScrollView className="right" onScroll={scrollRight} ref={right}>
-        {mockData.map(item=>(<View>
+      <ScrollView className="right" onScroll={scrollRight} ref={right} scrollY scrollTop={scrollTop}>
+        {mockData.map((item,index)=>(<View>
           <Text className={item.isSelected?'activeTitle':'normalTitle'}>{item.title}</Text>
           <View className="subContainer">
             {item.subData.map(subItem=>(<View className="sub" onClick={()=>test(subItem)}>

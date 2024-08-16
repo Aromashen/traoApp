@@ -44,6 +44,7 @@
 .container{
   display: flex;
   flex-direction: row;
+  height:200px
 
 }
 .left{
@@ -54,23 +55,29 @@
   padding:10px
 }
 .active{
-  background-color: #fff;
+  background-color: red;
   font-weight: 500;
+  font-size: 32px;
 }
 .activeTitle{
   color:#3371ff;
-  font-size:14px
+  font-size:28px
 }
 .normalTitle{
   color: rgba(0,0,0,0.6);
-  font-size:14px
+  font-size:28px
 }
 .sub{
   border: 1px solid #f0f0f0;
-  font-size: 12px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  padding:4px;
+  margin: 6px 6px 0 0;
 }
 .subContainer{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  
 }

@@ -42,12 +42,34 @@
 
 }
 .container{
+  display: flex;
   flex-direction: row;
 
 }
 .left{
   background-color: #f0f0f0;
+  box-shadow:2px 0 2px rgba(5,5,5,0.06)
 }
 .leftItem{
   padding:10px
+}
+.active{
+  background-color: #fff;
+  font-weight: 500;
+}
+.activeTitle{
+  color:#3371ff;
+  font-size:14px
+}
+.normalTitle{
+  color: rgba(0,0,0,0.6);
+  font-size:14px
+}
+.sub{
+  border: 1px solid #f0f0f0;
+  font-size: 12px;
+}
+.subContainer{
+  display: flex;
+  flex-direction: row;
 }

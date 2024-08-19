@@ -1,5 +1,5 @@
 import { View, Text, Image,ScrollView } from '@tarojs/components'
-import { useLoad,useReachBottom } from '@tarojs/taro'
+import { useLoad,useReachBottom,usePageScroll } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
 
 import { useState,useEffect,useRef } from 'react'
@@ -10,7 +10,9 @@ import logo from "../../assets/logo.webp"
 
 export default function Index() {
   const right = useRef(null)
+  const header = useRef(null)
   const width = Taro.getSystemInfoSync().screenWidth
+  const height = Taro.getSystemInfoSync().screenHeight
   const mockData = [
     {
     title:'旅游',
@@ -88,6 +90,10 @@ export default function Index() {
   useLoad(() => {
     console.log('Page loaded.')
   
+  
+  })
+  usePageScroll((res)=>{
+    console.log('res',res.scrollTop)
   })
   useReachBottom(()=>{console.log('usereachBottom')})
   const [toggle,setToggle] = useState(false)
@@ -97,6 +103,7 @@ export default function Index() {
   const [scrollTop,setScrollTop] = useState(0)
   useEffect(()=>{
     console.log(activeText)
+    console.log(header.current.clientHeight)
 
 
   },[activeText])
@@ -143,7 +150,7 @@ export default function Index() {
 
   return (
     <View className='index'>
-     {!toggle&&<View className="header">
+     {!toggle&&<View className="header" ref={header}>
       <Image src={logo} style={{height:'32px'}}></Image>
       <View>
         <Text className="routeTitle">{activeText}</Text>
@@ -160,8 +167,8 @@ export default function Index() {
       </View>
       <View className='mask'></View>
      </>}
-     <View className='container'>
-      <ScrollView className='left' scrollY={true}>
+     <View className='container' style={{}}>
+      <ScrollView className='left' scrollY style={{width:`${0.3*width}px`,height:`${height}px`}}>
         {mockData.map((item,index)=>(<View key={item.value} onClick={()=>clickLeft(item,index)} className={["leftItem",currentIndex==index?'active':'normal'].join(' ')}>
           <Text>{item.title}</Text>
         </View>))}

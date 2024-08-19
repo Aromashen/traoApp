@@ -1,12 +1,15 @@
+.index{
+  position: relative;
+}
 .header{
     display: flex;
-    position:sticky;
-    top:0;
+    position:fixed;
+    top:0px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding:15px;
     background:linear-gradient( 45deg, #13254F 0%, #2B4C87 100%);
+    z-index:99;
 
 }
 .routeTitle{
@@ -44,7 +47,9 @@
 .container{
   display: flex;
   flex-direction: row;
-  height:200px
+  height:200px;
+  position:relative;
+  top:160px
 
 }
 .left{
@@ -55,7 +60,7 @@
   padding:10px
 }
 .active{
-  background-color: red;
+  background-color: #fff;
   font-weight: 500;
   font-size: 32px;
 }

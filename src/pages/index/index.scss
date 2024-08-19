@@ -47,14 +47,17 @@
 .container{
   display: flex;
   flex-direction: row;
-  height:200px;
   position:relative;
-  top:160px
+  top:140px
 
 }
 .left{
   background-color: #f0f0f0;
   box-shadow:2px 0 2px rgba(5,5,5,0.06)
+}
+.right{
+  height: 200px;
+  margin-left: 24px;
 }
 .leftItem{
   padding:10px
@@ -63,6 +66,10 @@
   background-color: #fff;
   font-weight: 500;
   font-size: 32px;
+}
+.normal{
+  font-size: 32px;
+  font-weight: 300;
 }
 .activeTitle{
   color:#3371ff;

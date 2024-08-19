@@ -93,7 +93,7 @@ export default function Index() {
   
   })
   usePageScroll((res)=>{
-    console.log('res',res.scrollTop)
+    //console.log('res',res.scrollTop)
   })
   useReachBottom(()=>{console.log('usereachBottom')})
   const [toggle,setToggle] = useState(false)
@@ -102,11 +102,9 @@ export default function Index() {
   const [currentIndex,setCurrentIndex] = useState(0)
   const [scrollTop,setScrollTop] = useState(0)
   useEffect(()=>{
-    console.log(activeText)
-    console.log(header.current.clientHeight)
+    
 
-
-  },[activeText])
+  },[])
   const toggleMenu = ()=>{
     setToggle(pre=>!pre)
   }
@@ -135,18 +133,16 @@ export default function Index() {
   const scrollRight = (e)=>{
     const scrollTop = e.detail.scrollTop;
     setScrollTop(scrollTop);
+    console.log('scrolltop',scrollTop)
 
     let totalHeight = 0;
     for (let i = 0; i < mockData.length; i++) {
-      totalHeight += 40
+      totalHeight += 10
       if (scrollTop < totalHeight) {
         setCurrentIndex(i);
         break;
       }
     }  }
-  const test = (subItem)=>{
-    console.log('subItem',subItem)
-  }
 
   return (
     <View className='index'>
@@ -167,17 +163,17 @@ export default function Index() {
       </View>
       <View className='mask'></View>
      </>}
-     <View className='container' style={{}}>
+     <View className='container'>
       <ScrollView className='left' scrollY style={{width:`${0.3*width}px`,height:`${height}px`}}>
         {mockData.map((item,index)=>(<View key={item.value} onClick={()=>clickLeft(item,index)} className={["leftItem",currentIndex==index?'active':'normal'].join(' ')}>
           <Text>{item.title}</Text>
         </View>))}
       </ScrollView>
       <ScrollView className="right" onScroll={scrollRight} ref={right} scrollY scrollTop={scrollTop}>
-        {mockData.map((item,index)=>(<View>
+        {mockData.map((item,index)=>(<View style={{height:'40px'}}>
           <Text className={item.isSelected?'activeTitle':'normalTitle'}>{item.title}</Text>
           <View className="subContainer">
-            {item.subData.map(subItem=>(<View className="sub" onClick={()=>test(subItem)}>
+            {item.subData.map(subItem=>(<View className="sub">
               <Text>{subItem.title}</Text>
               
             </View>))}
